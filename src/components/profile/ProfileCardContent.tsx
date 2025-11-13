@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Person } from '@/data/people';
+import { PersonAppFormat as Person } from '@/hooks/useSupabaseData';
 import ProfileHeader from './ProfileHeader';
 import ProfileBio from './ProfileBio';
 import ProfileSocialLinks from './ProfileSocialLinks';

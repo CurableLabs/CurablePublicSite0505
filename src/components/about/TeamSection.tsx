@@ -1,10 +1,11 @@
 
-import React, { useRef, useState, useEffect } from 'react';
-import { people } from '@/data/people';
+import React, { useRef, useState, useEffect, useMemo } from 'react';
+import { usePeople, convertPersonToAppFormat } from '@/hooks/useSupabaseData';
 import ProfileCard from '@/components/ProfileCard';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { useInViewport } from '@/utils/performance';
 import GradientText from '@/components/ui/GradientText';
+import { Loader2 } from 'lucide-react';
 
 interface TeamSectionProps {
   isVisible: boolean;
@@ -12,13 +13,28 @@ interface TeamSectionProps {
 
 const TeamSection: React.FC<TeamSectionProps> = ({ isVisible }) => {
   const { ref, isInViewport } = useInViewport();
+  const { data: peopleData, isLoading } = usePeople();
   const [revealCards, setRevealCards] = useState<number[]>([]);
-  
+
+  // Convert people from DB format to app format
+  const people = useMemo(() =>
+    peopleData ? peopleData.map(convertPersonToAppFormat) : [],
+    [peopleData]
+  );
+
+  // Group and sort people by priority
+  const sortedPeople = useMemo(() => [
+    ...people.filter(person => person.group === 'founder'),
+    ...people.filter(person => person.group === 'team'),
+    ...people.filter(person => person.group === 'advisor'),
+    ...people.filter(person => person.group === 'contributor')
+  ], [people]);
+
   // Staggered reveal animation
   useEffect(() => {
-    if (isVisible && people.length > 0) {
+    if (isVisible && sortedPeople.length > 0) {
       const timer = setTimeout(() => {
-        people.forEach((_, index) => {
+        sortedPeople.forEach((_, index) => {
           setTimeout(() => {
             setRevealCards(prev => [...prev, index]);
           }, index * 80);
@@ -26,19 +42,22 @@ const TeamSection: React.FC<TeamSectionProps> = ({ isVisible }) => {
       }, 200);
       return () => clearTimeout(timer);
     }
-  }, [isVisible]);
-
-  // Group and sort people by priority
-  const sortedPeople = [
-    ...people.filter(person => person.group === 'founder'),
-    ...people.filter(person => person.group === 'team'), 
-    ...people.filter(person => person.group === 'advisor'),
-    ...people.filter(person => person.group === 'contributor')
-  ];
+  }, [isVisible, sortedPeople.length]);
   
+  if (isLoading) {
+    return (
+      <div className="relative w-full flex items-center justify-center py-20">
+        <div className="card-glass p-12 text-center">
+          <Loader2 className="w-12 h-12 animate-spin text-quantum-red mx-auto mb-4" />
+          <p className="text-body text-foreground/60">Loading team...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div 
-      id="team-section" 
+    <div
+      id="team-section"
       ref={ref as React.RefObject<HTMLDivElement>}
       className="relative w-full"
     >

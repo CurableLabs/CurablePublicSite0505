@@ -1,5 +1,5 @@
 import React, { memo, useState, useCallback } from 'react';
-import { Person } from '@/data/people';
+import { PersonAppFormat as Person } from '@/hooks/useSupabaseData';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { getBorderStyle } from '@/utils/profileStyles';

@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Person } from '@/data/people';
+import { PersonAppFormat as Person } from '@/hooks/useSupabaseData';
 import { 
   HoverCard,
   HoverCardContent,

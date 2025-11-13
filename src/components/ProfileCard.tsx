@@ -1,14 +1,14 @@
 
 import React, { useState, useCallback } from 'react';
 import Card from './Card';
-import { Person } from '@/data/people';
+import { PersonAppFormat } from '@/hooks/useSupabaseData';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { getBorderStyle, getGlowStyle } from '@/utils/profileStyles';
 
 interface ProfileCardProps {
-  person: Person;
+  person: PersonAppFormat;
   isActive?: boolean;
   featured?: boolean;
   compact?: boolean;

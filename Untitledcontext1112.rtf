@@ -5,8 +5,22 @@
 \margl1440\margr1440\vieww11520\viewh8400\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
-\f0\fs24 \cf0 Ok so here\'92s the plan. We need to first spin this up locally. Then we need to migrate the data from the old database to the new database so here is the info, however note that the old database is on pause from an old project :( even though. Id have a paid Suppose account maybe tied to a different aorg or project or space or something\'85 anyways I\'92ll do my best to gie you the info.Store all of this in the .env until we migrate, then we need to remove all of the old database info from the codebase including the .env. Please use the direct connection information to make the tables and perform the migration. Then we need to update the code to point to the new database, and remove all references to to the olde database including the .env (after we verify a successful migration). But again, make sure first we point the local version of the site at the new database after and then we can promote to the production version once ew verify everything successfully is moved and works. After we ship t it to point to product, we will prepare the entire package for a render deployment for this branch. \
+\f0\fs24 \cf0 \
 \
+\'97\
+Ok so here\'92s the plan. We need to first spin this up locally. Then we need to migrate the data from the old database (I think the files from the original lovable site may just be in this repo? We need to verify this by checkin the actual code)to the new database so here is the info below.Store all of this in the .env until we migrate, then we need to remove all of the old codebase references to the local files/etc. Please use the direct connection information to make the tables and perform the migration into Supabase from wherever this information is currently stored. Then we need to update the code to point to the new SupaBase Database, and remove all references to to the olde database including the .env (after we verify a successful migration). Then we need to prepare this for render deployment once we verify locally that everything is working with the new SupaBase instance. \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 New Database Info\
+URl: postgresql://postgres.ywjpkgtzgyczhpeyloel:[YOUR-PASSWORD]@aws-1-us-east-2.pooler.supabase.com:5432/postgres\
+Password: AmoreMia2025\
+URL: https://ywjpkgtzgyczhpeyloel.supabase.co\
+Anon public: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl3anBrZ3R6Z3ljemhwZXlsb2VsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMDY5MjIsImV4cCI6MjA3ODU4MjkyMn0.sLnUiiY-kXoGc8NQO0vP8TInEEYcfhwIUtqGs5ciQW4\
+Servuicle role: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl3anBrZ3R6Z3ljemhwZXlsb2VsIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MzAwNjkyMiwiZXhwIjoyMDc4NTgyOTIyfQ.gxJeiY5Y-njI0ZY4-jhZMguRINROFMGQ2QxFdnDBn6w\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\
+\'97\
 Original Database Info (the one we need to migrate from and deprecate platform wide)\
 URI: postgresql://postgres:[YOUR_PASSWORD]@db.godcfwqxkdcpsbdhmxws.supabase.co:5432/postgres\
 Password: AmoreMia2025\

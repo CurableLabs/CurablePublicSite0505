@@ -1,21 +1,28 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
-import { Play, Pause, Shuffle, RotateCcw } from 'lucide-react';
-import { haikus, type Haiku } from '@/data/haikus';
+import { Play, Pause, Shuffle, RotateCcw, Loader2 } from 'lucide-react';
+import { useHaikus, convertHaikuToAppFormat, type HaikuAppFormat } from '@/hooks/useSupabaseData';
 import ParticleBackground from '@/components/ParticleBackground';
 
 const Poetry = () => {
+  const { data: haikuData, isLoading, error } = useHaikus();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [currentHaiku, setCurrentHaiku] = useState<Haiku | null>(null);
+  const [currentHaiku, setCurrentHaiku] = useState<HaikuAppFormat | null>(null);
   const [isAutoPlay, setIsAutoPlay] = useState(false);
   const [showTitle, setShowTitle] = useState(true);
 
+  // Convert haikus from DB format to app format
+  const haikus = useMemo(() =>
+    haikuData ? haikuData.map(convertHaikuToAppFormat) : [],
+    [haikuData]
+  );
+
   const categories = Array.from(new Set(haikus.map(h => h.category)));
-  
-  const filteredHaikus = selectedCategory 
+
+  const filteredHaikus = selectedCategory
     ? haikus.filter(h => h.category === selectedCategory)
     : haikus;
 
@@ -96,7 +103,27 @@ const Poetry = () => {
         )}
       </AnimatePresence>
 
+      {/* Loading State */}
+      {isLoading && (
+        <div className="relative z-10 min-h-screen flex items-center justify-center">
+          <div className="card-glass p-12 text-center">
+            <Loader2 className="w-12 h-12 animate-spin text-warm-rose mx-auto mb-4" />
+            <p className="text-body text-foreground/60">Loading haikus...</p>
+          </div>
+        </div>
+      )}
+
+      {/* Error State */}
+      {error && (
+        <div className="relative z-10 min-h-screen flex items-center justify-center">
+          <div className="card-glass p-12 text-center">
+            <p className="text-body text-red-400">Error loading haikus: {error.message}</p>
+          </div>
+        </div>
+      )}
+
       {/* Main Content */}
+      {!isLoading && !error && (
       <div className="relative z-10 min-h-screen p-8">
         {/* Enhanced Controls */}
         <div className={`fixed top-24 left-8 right-8 z-30 transition-all duration-500 ${currentHaiku ? 'opacity-100 scale-100' : 'opacity-60 scale-95 pointer-events-none'}`}>
@@ -234,6 +261,7 @@ const Poetry = () => {
           </div>
         </div>
       </div>
+      )}
     </div>
   );
 };

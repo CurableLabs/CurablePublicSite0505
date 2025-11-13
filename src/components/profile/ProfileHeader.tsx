@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Person } from '@/data/people';
+import { PersonAppFormat as Person } from '@/hooks/useSupabaseData';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 
