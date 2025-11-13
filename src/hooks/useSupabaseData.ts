@@ -19,6 +19,7 @@ export function usePeople() {
       const { data, error } = await supabase
         .from('people')
         .select('*')
+        .eq('is_active', true)
         .order('display_order', { ascending: true });
 
       if (error) throw error;
@@ -35,6 +36,7 @@ export function usePeopleByGroup(group: 'team' | 'advisor' | 'founder' | 'contri
         .from('people')
         .select('*')
         .eq('member_group', group)
+        .eq('is_active', true)
         .order('display_order', { ascending: true });
 
       if (error) throw error;
