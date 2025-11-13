@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const GatedIpNft = () => {
+const Marketplace = () => {
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="text-center">
@@ -9,11 +9,11 @@ const GatedIpNft = () => {
           Coming Soon!
         </h1>
         <p className="text-xl text-foreground/70 font-poppins">
-          Our gated IP NFT platform is in development
+          Our marketplace is in development
         </p>
       </div>
     </div>
   );
 };
 
-export default GatedIpNft;
+export default Marketplace;

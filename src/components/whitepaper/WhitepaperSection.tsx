@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
-import { WhitepaperSection as WhitepaperSectionType } from '@/data/whitepaperSections';
+import { Tables } from '@/integrations/supabase/types';
+type WhitepaperSectionType = Tables<'whitepaper_sections'>;
 
 interface WhitepaperSectionProps {
   section: WhitepaperSectionType;

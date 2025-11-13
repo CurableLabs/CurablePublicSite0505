@@ -1,7 +1,13 @@
 
 import React from 'react';
-import { tokenRows } from '@/data/tokenRows';
-import { tokenIntro, vestingText } from '@/data/tokenCopy';
+// TODO: Migrate tokenomics data to Supabase
+const tokenRows = [
+  { category: 'Core Team', percentage: '30%' },
+  { category: 'Capital', percentage: '19%' },
+  { category: 'Treasury Reserve', percentage: '51%' }
+];
+const tokenIntro = 'Tokenomics distribution for $CURE token';
+const vestingText = '1-year cliff, 3-year linear vesting for Core Team allocation';
 import { Link } from 'react-router-dom';
 import CommandHUDHeader from '@/components/CommandHUDHeader';
 import CommandPatternBackground from '@/components/CommandPatternBackground';

@@ -96,11 +96,11 @@ export const MobileNav = () => {
                       </Link>
                     </SheetClose>
                     <SheetClose asChild>
-                      <Link 
-                        to="/gated-ip-nft" 
-                        className={`block text-sm py-2 ${isActive('/gated-ip-nft') ? 'text-blue-400' : 'text-titanium-white/80'}`}
+                      <Link
+                        to="/marketplace"
+                        className={`block text-sm py-2 ${isActive('/marketplace') ? 'text-blue-400' : 'text-titanium-white/80'}`}
                       >
-                        Gated IP NFT
+                        Marketplace
                       </Link>
                     </SheetClose>
                   </div>

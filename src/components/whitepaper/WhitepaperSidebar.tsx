@@ -2,7 +2,8 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Download, Github, Zap } from "lucide-react";
-import { WhitepaperSection } from '@/data/whitepaperSections';
+import { Tables } from '@/integrations/supabase/types';
+type WhitepaperSection = Tables<'whitepaper_sections'>;
 
 interface WhitepaperSidebarProps {
   sections: WhitepaperSection[];

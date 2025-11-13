@@ -78,11 +78,11 @@ export const DesktopNav = () => {
                   </Link>
                 </NavigationMenuLink>
                 <NavigationMenuLink asChild>
-                  <Link 
-                    to="/gated-ip-nft" 
+                  <Link
+                    to="/marketplace"
                     className="block px-3 py-2 text-sm text-foreground hover:text-cosmic-aura transition-colors font-poppins"
                   >
-                    Gated IP NFT
+                    Marketplace
                   </Link>
                 </NavigationMenuLink>
               </div>
@@ -100,25 +100,26 @@ export const DesktopNav = () => {
             <NavigationMenuContent>
               <div className="p-2 w-32 bg-gunmetal-900/95 border border-quantum-cyan/30 backdrop-blur-lg shadow-lg shadow-quantum-cyan/20">
                 <NavigationMenuLink asChild>
-                  <a 
-                    href="https://curio-data.lovable.app" 
-                    target="_blank" 
+                  <a
+                    href="https://curio-data.lovable.app"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center px-3 py-2 text-lg hover:bg-quantum-cyan/20 transition-colors rounded"
                   >
                     <span>📈 👾 ⚛️</span>
                   </a>
                 </NavigationMenuLink>
-                <NavigationMenuLink asChild>
-                  <a 
-                    href="https://binding-db-integrator-1-codelace77.replit.app/" 
-                    target="_blank" 
+                {/* Temporarily commented out - Second app link */}
+                {/* <NavigationMenuLink asChild>
+                  <a
+                    href="https://binding-db-integrator-1-codelace77.replit.app/"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center px-3 py-2 text-lg hover:bg-cosmic-indigo/20 transition-colors rounded"
                   >
                     <span>🧬 🔭 📊</span>
                   </a>
-                </NavigationMenuLink>
+                </NavigationMenuLink> */}
               </div>
             </NavigationMenuContent>
           </NavigationMenuItem>

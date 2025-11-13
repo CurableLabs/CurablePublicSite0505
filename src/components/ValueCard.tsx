@@ -2,7 +2,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Card from './Card';
 import GradientText from './ui/GradientText';
-import { Value } from '@/data/values';
+import { Tables } from '@/integrations/supabase/types';
+type Value = Tables<'core_values'>;
 
 interface ValueCardProps {
   value: Value;

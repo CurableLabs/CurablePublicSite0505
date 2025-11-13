@@ -1,8 +1,9 @@
 import React, { memo, useMemo, useState, useCallback } from 'react';
-import { people } from '@/data/people';
+import { usePeople, convertPersonToAppFormat } from '@/hooks/useSupabaseData';
 import { useInViewport, useReducedMotion } from '@/utils/performance';
 import GradientText from '@/components/ui/GradientText';
 import OptimizedProfileCard from './OptimizedProfileCard';
+import { Loader2 } from 'lucide-react';
 
 interface TeamSectionProps {
   isVisible: boolean;
@@ -12,7 +13,13 @@ const OptimizedTeamSection: React.FC<TeamSectionProps> = memo(({ isVisible }) =>
   const { ref, isInViewport } = useInViewport();
   const prefersReducedMotion = useReducedMotion();
   const [loadedProfiles, setLoadedProfiles] = useState<Set<number>>(new Set());
-  
+  const { data: peopleData, isLoading } = usePeople();
+
+  const people = useMemo(() =>
+    peopleData ? peopleData.map(convertPersonToAppFormat) : [],
+    [peopleData]
+  );
+
   // Memoize sorted people to prevent re-computation
   const sortedPeople = useMemo(() => {
     const groupOrder = ['founder', 'guardian', 'team', 'advisor', 'contributor'];
@@ -21,7 +28,7 @@ const OptimizedTeamSection: React.FC<TeamSectionProps> = memo(({ isVisible }) =>
       const bIndex = groupOrder.indexOf(b.group);
       return aIndex - bIndex;
     });
-  }, []);
+  }, [people]);
 
   // Handle profile load callback
   const handleProfileLoad = useCallback((index: number) => {
@@ -39,6 +46,14 @@ const OptimizedTeamSection: React.FC<TeamSectionProps> = memo(({ isVisible }) =>
   }, [sortedPeople]);
 
   if (!isVisible) return null;
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <Loader2 className="w-12 h-12 animate-spin text-quantum-red" />
+      </div>
+    );
+  }
 
   return (
     <div ref={ref} className="space-y-8">

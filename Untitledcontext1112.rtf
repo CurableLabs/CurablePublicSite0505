@@ -5,7 +5,9 @@
 \margl1440\margr1440\vieww11520\viewh8400\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
-\f0\fs24 \cf0 \
+\f0\fs24 \cf0 ok now this is currently the main2 branch. i want to merge this into the main branch so it deploys (temporarily bc Hugh is not available to transfer the domains) from lovable. i dont want any of the old  code from lovable i want it to all be\
+  the updated code we just enahcned and modified. so do i just create a pull request to merge with main and approve it? also as an FYI i did disconenct the vaultZ(obselete.unsused DB) in lovable from this project/site. so it should not\
+  interfgere or confuse or cause issues hopefully now (i want to also delete it from Supabase once its comepltely safe to do so).  we can review the ppl on the abotu page after all of this works once.  \
 \
 \'97\
 Ok so here\'92s the plan. We need to first spin this up locally. Then we need to migrate the data from the old database (I think the files from the original lovable site may just be in this repo? We need to verify this by checkin the actual code)to the new database so here is the info below.Store all of this in the .env until we migrate, then we need to remove all of the old codebase references to the local files/etc. Please use the direct connection information to make the tables and perform the migration into Supabase from wherever this information is currently stored. Then we need to update the code to point to the new SupaBase Database, and remove all references to to the olde database including the .env (after we verify a successful migration). Then we need to prepare this for render deployment once we verify locally that everything is working with the new SupaBase instance. \

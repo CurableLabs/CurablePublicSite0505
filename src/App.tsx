@@ -20,7 +20,7 @@ import Join from "./pages/Join";
 import Novel from "./pages/Novel";
 import Wearable from "./pages/Wearable";
 import Agency from "./pages/Agency";
-import GatedIpNft from "./pages/GatedIpNft";
+import Marketplace from "./pages/Marketplace";
 import News from "./pages/News";
 import NotFound from "./pages/NotFound";
 
@@ -136,9 +136,9 @@ const App = () => {
                         <Agency />
                       </PageTransition>
                     } />
-                    <Route path="/gated-ip-nft" element={
+                    <Route path="/marketplace" element={
                       <PageTransition>
-                        <GatedIpNft />
+                        <Marketplace />
                       </PageTransition>
                     } />
                     <Route path="/news" element={

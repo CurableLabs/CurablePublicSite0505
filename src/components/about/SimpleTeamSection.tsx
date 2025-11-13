@@ -1,17 +1,33 @@
-import React, { memo } from 'react';
-import { people } from '@/data/people';
+import React, { memo, useMemo } from 'react';
+import { usePeople, convertPersonToAppFormat } from '@/hooks/useSupabaseData';
 import GradientText from '@/components/ui/GradientText';
 import SimpleProfileCard from './SimpleProfileCard';
+import { Loader2 } from 'lucide-react';
 
 interface SimpleTeamSectionProps {
   isVisible: boolean;
 }
 
 const SimpleTeamSection: React.FC<SimpleTeamSectionProps> = memo(({ isVisible }) => {
+  const { data: peopleData, isLoading } = usePeople();
+
+  const people = useMemo(() =>
+    peopleData ? peopleData.map(convertPersonToAppFormat) : [],
+    [peopleData]
+  );
+
   if (!isVisible) return null;
 
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <Loader2 className="w-12 h-12 animate-spin text-quantum-red" />
+      </div>
+    );
+  }
+
   // Simple sorting - no complex logic
-  const sortedPeople = people.sort((a, b) => {
+  const sortedPeople = [...people].sort((a, b) => {
     const order = ['founder', 'guardian', 'team', 'advisor', 'contributor'];
     return order.indexOf(a.group) - order.indexOf(b.group);
   });
